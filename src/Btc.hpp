@@ -10,7 +10,7 @@
 class Btc
 {
 private:
-    const std::map<std::string, int> 	    Dictionary;
+    std::map<std::string, float> 	    Dictionary;
 
 public:
     Btc();
