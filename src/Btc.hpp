@@ -7,10 +7,14 @@
 #include <fstream>
 #include <iterator>
 
+// Map: unique keys.
+// Multimap: same keys are ok.
+
 class Btc
 {
 private:
-    std::map<std::string, float> 	    Dictionary;
+    std::map<std::string, float>            Dictionary;
+    std::multimap<std::string, float>       Input;
 
 public:
     Btc();
@@ -19,8 +23,9 @@ public:
 	Btc(const Btc& copy);
 	Btc& operator=(const Btc & other);
 
-    unsigned int    getSize() const;
-
+    void    printData();
+    void    printInput();
+    void    printOutcome();
 };
 
 #endif
