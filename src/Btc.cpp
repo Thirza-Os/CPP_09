@@ -10,12 +10,22 @@ Btc::Btc(char *filepath)
     std::cout << " filepath contructor called" << std::endl;
     
     char        buffer[1024];
-    std::string line;
+
+    if (strcmp(filepath, "input.txt") != 0)
+    {
+        std::cerr << "Incorrect input file" << std::endl;
+        exit(1);
+    }
+
+    this->filepath = filepath;
 
     std::fstream fin("data.csv");
 
     if (!fin)
+    {
         std::cerr << "File could not be opened" << std::endl;
+        exit(1);
+    }
 
         while(fin.getline(buffer, 1024))
         {
@@ -65,27 +75,50 @@ void    Btc::printDictionary(void)
 }
 
 
-void    Btc::printOutcome(void)
+void    Btc::printOutcome()
 {
-    std::cout << "hoi" << std::endl;
+    char        buffer[1024];
+    struct      tm time;
 
-//     std::map <std::string, float>::iterator itrDictionary;
+    std::fstream fin(this->filepath);
+    fin.getline(buffer, 1024);
+    if (strcmp(buffer, "date | value") != 0)
+    {
+        std::cerr << "Incorrect input file content" << std::endl;
+        exit(1);
+    }
+    while(fin.getline(buffer, 1024))
+    {
+        char *Date = strtok(buffer, "|");
+        char *charDigit = strtok(NULL, "|");
 
-//     //      iterating through the contents
-//    for () 
-//    {
-//         itrDictionary = this->Dictionary.begin();
-//         while ( itrDictionary != this->Dictionary.end())
-//         {
-//             if (itrInput->first.compare(itrDictionary->first) == 0)
-//             {
-//                 std::cout << "first: " << itrInput->second << "second" << itrDictionary->second << std::endl;
-//                 std::cout << itrInput->second * itrDictionary->second << std::endl;
-//             }
-//             itrDictionary++;
-//         }
-//       //std::cout << std::setprecision(7) << itr->first << ": " << itr->second << std::endl;
-//    }
+        std::cout << isdigit(charDigit[strlen(charDigit) - 1]) << std::endl;
 
-//    std::cout << "Size of container: " << Input.size() << std::endl;
+        if ((charDigit[0] != ' ') || (!isdigit(Date[0])) || (!isdigit(charDigit[strlen(charDigit) - 1])))
+        {
+                std::cout << "Error: wrong input format " << charDigit << std::endl;
+                break;
+        }
+        if (!strptime(Date, "%Y-%m-%d", &time)) 
+        {
+            std::cout << "Error: bad input => " << Date <<std::endl;
+            continue;
+        }
+        if (charDigit[1] == '-')
+        {
+                std::cout << "Error: not a positive number => " << charDigit << std::endl;
+                break;
+        }
+        for (size_t i = 1; i < strlen(charDigit); i++)
+        {
+            if (charDigit[i] != '.' && !isdigit(charDigit[i]))
+            {
+                std::cout << "Error: not a valid number => " << charDigit <<std::endl;
+                break;
+            }
+        }
+        std::cout << "Correct: " << Date << charDigit << std::endl;
+
+    }
+
 }

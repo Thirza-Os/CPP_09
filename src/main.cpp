@@ -8,6 +8,6 @@ int main(int argc, char *argv[])
         exit(1);
     }
     Btc setup = Btc(argv[1]);
-    // setup.printOutcome();
-    setup.printDictionary();
+    setup.printOutcome();
+    // setup.printDictionary();
 }

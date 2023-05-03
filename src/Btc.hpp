@@ -1,6 +1,7 @@
 #ifndef BTC_HPP
 # define BTC_HPP
 
+
 #include <string>
 #include <cstring>
 #include <map>
@@ -8,6 +9,8 @@
 #include <fstream>
 #include <iterator>
 #include <limits.h>
+#include <ctime>
+#include <ctype.h>
 
 // Map: unique keys.
 // Multimap: same keys are ok.
@@ -16,6 +19,7 @@ class Btc
 {
 private:
     std::map<std::string, float>            Dictionary;
+    char                                    *filepath;
 
 public:
     Btc();
