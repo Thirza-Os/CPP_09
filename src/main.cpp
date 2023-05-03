@@ -9,5 +9,5 @@ int main(int argc, char *argv[])
     }
     Btc setup = Btc(argv[1]);
     // setup.printOutcome();
-    // setup.printInput();
+    setup.printDictionary();
 }

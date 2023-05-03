@@ -8,9 +8,10 @@ Btc::Btc()
 Btc::Btc(char *filepath)
 {
     std::cout << " filepath contructor called" << std::endl;
-
-    char        buffer[1024];
     
+    char        buffer[1024];
+    std::string line;
+
     std::fstream fin("data.csv");
 
     if (!fin)
@@ -26,32 +27,17 @@ Btc::Btc(char *filepath)
         }
 
     std::fstream finInput(filepath);
-
-    while(finInput.getline(buffer, 1024))
-    {
-        std::string str = buffer;
-        // if (str.size() == 0)
-        //     continue;
-        const char *dateInput = strtok(buffer, " | ");
-        const char *value = strtok(NULL, " | ");
-        this->Input.insert(std::pair<std::string, float>(dateInput, std::atof(value)));
-    }
 }
 
 Btc::~Btc()
 {
     std::cout << "destructor called " << std::endl;
-    
-    // is this necessary?
-    Dictionary.clear();
-    Input.clear();
 }
 
 Btc::Btc(const Btc &copy)
 {
     std::cout << "copy constructor called " << std::endl;
 
-    // copy all data
     *this = copy;
 }
 
@@ -65,7 +51,7 @@ Btc& Btc::operator=(const Btc & other)
 }
 
 
-void    Btc::printData(void)
+void    Btc::printDictionary(void)
 {
 
    std::map <std::string, float>::iterator itr;
@@ -78,40 +64,28 @@ void    Btc::printData(void)
    std::cout << "Size of container: " << Dictionary.size() << std::endl;
 }
 
-void    Btc::printInput(void)
-{
-
-   std::map <std::string, float>::iterator itr;
-
-    //      iterating through the contents
-   for (itr = this->Input.begin(); itr != this->Input.end(); ++itr) {
-      std::cout << std::setprecision(7) << itr->first << ": " << itr->second << std::endl;
-   }
-
-   std::cout << "Size of container: " << Input.size() << std::endl;
-}
 
 void    Btc::printOutcome(void)
 {
+    std::cout << "hoi" << std::endl;
 
-    std::map <std::string, float>::iterator itrInput;
-    std::map <std::string, float>::iterator itrDictionary;
+//     std::map <std::string, float>::iterator itrDictionary;
 
-    //      iterating through the contents
-   for (itrInput = this->Input.begin(); itrInput != this->Input.end(); ++itrInput) 
-   {
-        itrDictionary = this->Dictionary.begin();
-        while ( itrDictionary != this->Dictionary.end())
-        {
-            if (itrInput->first.compare(itrDictionary->first) == 0)
-            {
-                std::cout << "first: " << itrInput->second << "second" << itrDictionary->second << std::endl;
-                std::cout << itrInput->second * itrDictionary->second << std::endl;
-            }
-            itrDictionary++;
-        }
-      //std::cout << std::setprecision(7) << itr->first << ": " << itr->second << std::endl;
-   }
+//     //      iterating through the contents
+//    for () 
+//    {
+//         itrDictionary = this->Dictionary.begin();
+//         while ( itrDictionary != this->Dictionary.end())
+//         {
+//             if (itrInput->first.compare(itrDictionary->first) == 0)
+//             {
+//                 std::cout << "first: " << itrInput->second << "second" << itrDictionary->second << std::endl;
+//                 std::cout << itrInput->second * itrDictionary->second << std::endl;
+//             }
+//             itrDictionary++;
+//         }
+//       //std::cout << std::setprecision(7) << itr->first << ": " << itr->second << std::endl;
+//    }
 
 //    std::cout << "Size of container: " << Input.size() << std::endl;
 }
