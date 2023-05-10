@@ -11,6 +11,8 @@
 #include <limits.h>
 #include <ctime>
 #include <ctype.h>
+#include <sstream>
+#include <cmath>
 
 // Map: unique keys.
 // Multimap: same keys are ok.

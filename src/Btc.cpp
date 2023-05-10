@@ -1,5 +1,8 @@
 #include "Btc.hpp"
 
+// does not handle: multiple ||| / chars in the digit input
+// if | but no value: you get nothing
+
 Btc::Btc()
 {
     std::cout << " basic contructor called" << std::endl;
@@ -78,46 +81,80 @@ void    Btc::printDictionary(void)
 void    Btc::printOutcome()
 {
     char        buffer[1024];
+    std::string dateString;
+    std::string digitString;
     struct      tm time;
 
     std::fstream fin(this->filepath);
     fin.getline(buffer, 1024);
+
+    // Check if the header of the input file is correct
     if (strcmp(buffer, "date | value") != 0)
     {
-        std::cerr << "Incorrect input file content" << std::endl;
+        std::cerr << "Incorrect column naming: " << buffer << std::endl;
         exit(1);
     }
+
+    // Process input line by line
     while(fin.getline(buffer, 1024))
     {
-        char *Date = strtok(buffer, "|");
-        char *charDigit = strtok(NULL, "|");
+        std::string buff(buffer);
 
-        std::cout << isdigit(charDigit[strlen(charDigit) - 1]) << std::endl;
-
-        if ((charDigit[0] != ' ') || (!isdigit(Date[0])) || (!isdigit(charDigit[strlen(charDigit) - 1])))
+        // Check if the delimeter is present
+        if (buff.find("|") == std::string::npos)
         {
-                std::cout << "Error: wrong input format " << charDigit << std::endl;
-                break;
-        }
-        if (!strptime(Date, "%Y-%m-%d", &time)) 
-        {
-            std::cout << "Error: bad input => " << Date <<std::endl;
+            std::cout << "Bad input: " << buff << std::endl;
             continue;
         }
-        if (charDigit[1] == '-')
+        else
         {
-                std::cout << "Error: not a positive number => " << charDigit << std::endl;
+            char *Date      = strtok(buffer, "|");
+            dateString      = Date;
+
+            char *charDigit = strtok(NULL, "|");
+            digitString     = charDigit;
+        }
+
+        // Remove whitespaces with stringstrem (get first string and save this)
+            std::string         Date;
+            float               Digit;
+
+            std::stringstream   ss_date;
+            std::stringstream   ss_digit;
+
+            ss_date << dateString;
+            ss_date >> Date;
+
+            ss_digit << digitString;
+            ss_digit >> Digit;
+
+        // Check if the dates/digits are valid
+        if (!strptime(&Date[0], "%Y-%m-%d", &time)) 
+        {
+            std::cout << "Error: very very BAD input => " << Date <<std::endl;
+            continue;
+        }
+        if (signbit(Digit) == true)
+        {
+                std::cout << "Error: stay positive brah! " << Digit << std::endl;
                 break;
         }
-        for (size_t i = 1; i < strlen(charDigit); i++)
+        if (Digit > 1000)
         {
-            if (charDigit[i] != '.' && !isdigit(charDigit[i]))
-            {
-                std::cout << "Error: not a valid number => " << charDigit <<std::endl;
+                std::cout << "NOOOO not so large please! " << std::endl;
                 break;
-            }
         }
-        std::cout << "Correct: " << Date << charDigit << std::endl;
+
+        // iterate over the keys and find the value or the value clostest
+        std::map <std::string, float>::iterator itr;
+
+        itr = this->Dictionary.lower_bound(Date);
+
+        float output = (*itr).second * Digit;
+
+        std::cout << (*itr).first << " => " << output << std::endl;
+
+        // std::cout << "date/nr" << Date << " ," << Digit << std::endl;
 
     }
 
