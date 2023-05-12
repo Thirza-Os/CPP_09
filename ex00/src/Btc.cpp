@@ -119,6 +119,7 @@ void    Btc::printOutcome()
             std::string         Date;
             float               Digit;
 
+        // Using std::stringstream to read and write to a string
             std::stringstream   ss_date;
             std::stringstream   ss_digit;
 
