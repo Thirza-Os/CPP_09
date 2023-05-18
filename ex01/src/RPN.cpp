@@ -37,7 +37,7 @@ void    RPN::executeExpression(char *expression)
     int                 digit;
     // char                signs;
 
-    // Using std::istringstream to parse input as integers
+    // Using std::istringstream to parse input 
     std::stringstream ss(expression);
 
     while (ss >> input)
