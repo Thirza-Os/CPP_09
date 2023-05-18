@@ -11,6 +11,11 @@ class PmergeMe
 {
 private:
     std::vector<int>    vectorMerge;
+    int                 size;
+
+    void                vectorMergeSort(std::vector<int>& vec, int beginIndex, int endIndex);
+    void                merge(std::vector<int>& vec, int beginIndex, int middleIndex, int endIndex);
+    void                vectorInsertionSort(std::vector<int>& vec, int beginIndex, int endIndex);
 
 public:
     PmergeMe();
@@ -19,7 +24,9 @@ public:
 	PmergeMe(const PmergeMe& copy);
 	PmergeMe& operator=(const PmergeMe & other);
 
-    void    printVector();
+    void                performSort();
+    void                printBefore();
+
 };
 
 #endif

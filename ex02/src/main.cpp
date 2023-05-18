@@ -9,5 +9,7 @@ int main(int argc, char *argv[])
     }
     
     PmergeMe setup = PmergeMe(argv);
-    setup.printVector();
+    setup.printBefore();
+    setup.performSort();
+    setup.printBefore();
 }
