@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     // -> for sequential access vector would be more efficient
 
-    if (argc < 2)
+    if (argc < 1)
     {
         std::cerr << "Error: Not enough numbers" << std::endl;
         exit(1);

@@ -15,8 +15,6 @@ private:
     std::deque<int>     dequeMerge;
     std::clock_t        timeVec;
     std::clock_t        timeDeque;
-
-
     int                 size;
 
     void                vectorMergeSort(std::vector<int>& vec, int beginIndex, int endIndex);
