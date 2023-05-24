@@ -59,8 +59,14 @@ PmergeMe& PmergeMe::operator=(const PmergeMe & other)
 {
     std::cout << "ass operator overload called " << std::endl;
 
-	if (this == &other)
-		return *this;
+	if (this != &other)
+	{
+        this->vectorMerge   = other.vectorMerge;
+        this->dequeMerge    = other.dequeMerge;
+        this->timeVec       = other.timeVec;
+        this->timeDeque     = other.timeDeque;
+        this->size          = other.size;
+    }
     return *this;
 }
 
