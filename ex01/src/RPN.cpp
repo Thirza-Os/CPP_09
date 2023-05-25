@@ -3,15 +3,9 @@
 // does not handle: multiple ||| / chars in the digit input
 // if | but no value: you get nothing
 
-RPN::RPN()
-{
-    std::cout << "Basic contructor called" << std::endl;
-}
+RPN::RPN() { std::cout << "Basic contructor called" << std::endl; }
 
-RPN::~RPN()
-{
-    std::cout << "Destructor called " << std::endl;
-}
+RPN::~RPN() { std::cout << "Destructor called " << std::endl; }
 
 RPN::RPN(const RPN &copy)
 {
@@ -29,19 +23,19 @@ RPN& RPN::operator=(const RPN & other)
     return *this;
 }
 
-
 void    RPN::executeExpression(char *expression)
 {
     std::stack<int>     stack;
     std::string         input;
     int                 digit;
-    // char                signs;
 
-    // Using std::istringstream to parse input 
+    // Using std::stringstream to parse input: read from a string as cin
+    // Read char by char
     std::stringstream ss(expression);
 
     while (ss >> input)
     {
+        // Handle arithmetic operators
         if (input == "+" || input == "-" || input == "*" || input == "/")
         {
             if (stack.size() < 2)

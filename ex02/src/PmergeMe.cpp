@@ -81,7 +81,7 @@ void    PmergeMe::performSort()
     this->timeVec = endVecTime - startVecTime;
 
 
-        // List sort
+        // deque sort
     std::clock_t startQueTime = std::clock();
 
     dequeMergeSort(this->dequeMerge, beginIndex, endIndex);

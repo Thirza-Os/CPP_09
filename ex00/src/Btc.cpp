@@ -2,10 +2,7 @@
 
 // Unhandled: bad input such as ||||| 
 
-Btc::Btc()
-{
-    std::cout << " basic contructor called" << std::endl;
-}
+Btc::Btc() { std::cout << " basic contructor called" << std::endl; }
 
 Btc::Btc(char *filepath)
 {
@@ -18,11 +15,9 @@ Btc::Btc(char *filepath)
         std::cerr << "Incorrect input file" << std::endl;
         exit(1);
     }
-
     this->filepath = filepath;
 
     std::ifstream fin("data.csv");
-
     if (!fin)
     {
         std::cerr << "File could not be opened" << std::endl;
@@ -35,16 +30,13 @@ Btc::Btc(char *filepath)
             // get the next token i.e. word before second empty space
             // NULL indicates we are using the same pointer we used previously i.e. buffer
             const char *exchange_rate = strtok(NULL, ",");
+
+            // Add to the map
             this->Dictionary[std::string(dateDic)] = std::atof(exchange_rate);       
         }
-
-    std::fstream finInput(filepath);
 }
 
-Btc::~Btc()
-{
-    std::cout << "destructor called " << std::endl;
-}
+Btc::~Btc() { std::cout << "destructor called " << std::endl; }
 
 Btc::Btc(const Btc &copy)
 {
@@ -65,7 +57,6 @@ Btc& Btc::operator=(const Btc & other)
     return *this;
 }
 
-
 void    Btc::printDictionary(void)
 {
 
@@ -79,18 +70,17 @@ void    Btc::printDictionary(void)
    std::cout << "Size of container: " << Dictionary.size() << std::endl;
 }
 
-
 void    Btc::printOutcome()
 {
     char            buffer[1024];
     std::string     dateString;
     std::string     digitString;
-    struct      tm time;
+    struct          tm time;
 
+    // First getline to check if the header is correct
     std::fstream fin(this->filepath);
     fin.getline(buffer, 1024);
 
-    // Check if the header of the input file is correct
     if (strcmp(buffer, "date | value") != 0)
     {
         std::cerr << "Incorrect column naming: " << buffer << std::endl;
@@ -120,15 +110,16 @@ void    Btc::printOutcome()
             dateString      = Date;
 
             char *charDigit = strtok(NULL, "|");
+            digitString     = charDigit;
+
             if (charDigit == NULL || Date == NULL)
             {
                 std::cout << "Error: Bad Input => " << Date <<std::endl;
                 continue;
             }
-            digitString     = charDigit;
         }
 
-        // Remove whitespaces with stringstrem (get first string and save this)
+        // Remove whitespaces with stringstream (get first string and save this)
             std::string         Date;
             float               Digit;
 

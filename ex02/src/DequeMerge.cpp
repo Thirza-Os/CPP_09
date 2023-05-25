@@ -76,12 +76,12 @@ void    PmergeMe::dequeInsertionSort(std::deque<int>& deque, int beginIndex, int
 void    PmergeMe::dequeMergeSort(std::deque<int>& deque, int beginIndex, int endIndex)
 {
     // First insertion sort, then merge the rest. 
-    // set changesort to the amount where to use insertion sort. if K = 1, the algorithm will work as merge sort. if K = N, only insertion sort will be used
+    // set changesort to the amount where to use insertion sort. if changeSort = 1, the algorithm will work as merge sort. if changeSort = N, only insertion sort will be used
     int     changeSort = 5;
     int     middleIndex;
 
-    // Skip merge sort while the halves are smaller than K (It skips to start with insertion sort)
-    // If the halves are bigger than K: Merge sort will kick in!
+    // Skip merge sort while the halves are smaller than changeSort (It skips to start with insertion sort)
+    // If the halves are bigger than changeSort: Merge sort will kick in!
     if (endIndex - beginIndex > changeSort)
     {
         // Take the middle index to divide the que in halves
@@ -91,7 +91,7 @@ void    PmergeMe::dequeMergeSort(std::deque<int>& deque, int beginIndex, int end
         dequeMergeSort(deque, middleIndex + 1, endIndex);
         mergeDeque(deque, beginIndex, middleIndex, endIndex);
     }
-    // Call insertion sort for each sub array of size K
+    // Call insertion sort for each sub array of size changeSort
     else
         dequeInsertionSort(deque, beginIndex, endIndex);
 }
