@@ -82,9 +82,9 @@ void    Btc::printDictionary(void)
 
 void    Btc::printOutcome()
 {
-    char        buffer[1024];
-    std::string dateString;
-    std::string digitString;
+    char            buffer[1024];
+    std::string     dateString;
+    std::string     digitString;
     struct      tm time;
 
     std::fstream fin(this->filepath);
@@ -108,7 +108,8 @@ void    Btc::printOutcome()
             std::cout << "Bad input: " << buff << std::endl;
             continue;
         }
-        else if (strcmp(buffer, "|") == 0)
+        // Check if there are only delimeters present
+        else if (buff.find_first_not_of("|") == std::string::npos)
         {
             std::cout << "Bad input: " << buff << std::endl;
             continue;

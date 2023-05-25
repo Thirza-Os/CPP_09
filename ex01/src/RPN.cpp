@@ -85,7 +85,7 @@ void    RPN::executeExpression(char *expression)
             exit(1);
         }
 
-        // // Skip whitespaces
+        // Skip whitespaces
         ss >> std::ws;
     }
 

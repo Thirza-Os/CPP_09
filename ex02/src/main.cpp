@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     if (argc < 1)
     {
-        std::cerr << "Error: Not enough numbers" << std::endl;
+        std::cerr << "Error: Bad input" << std::endl;
         exit(1);
     }
     

@@ -1,7 +1,9 @@
 NAME 	=	PmergeMe
 
-SRC     =	src/main.cpp \
-			src/PmergeMe.cpp
+SRC     =	src/main.cpp 		\
+			src/PmergeMe.cpp 	\
+			src/VectorMerge.cpp \
+			src/DequeMerge.cpp
 
 CC		=	g++
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98
