@@ -114,7 +114,7 @@ void    PmergeMe::print(void)
 
 void    PmergeMe::printTime(void)
 {
-    std::cout << "Time to process a range of " << this->size << " elements with std::vector: " << this->timeVec << " us" << std::endl;
+    std::cout << "Time to process a range of " << this->size << " elements with std::vector: " << this->timeVec << " Processing time" << std::endl;
 
-    std::cout << "Time to process a range of " << this->size << " elements with std::que: " << this->timeDeque << " us" << std::endl;
+    std::cout << "Time to process a range of " << this->size << " elements with std::que: " << this->timeDeque << " Processing time" << std::endl;
 }
